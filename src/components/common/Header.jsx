@@ -1,22 +1,21 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: "#f1f1f1",
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: "#f1f1f1",
   },
   marginLeft: 0,
+  marginRight: "10%",
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(1),
@@ -42,6 +41,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
+    marginRight: 10,
     [theme.breakpoints.up("sm")]: {
       width: "12ch",
       "&:focus": {
@@ -51,38 +51,38 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar() {
+const StylesToolbar = styled(Toolbar)(({ theme }) => ({
+  marginLeft: "10%",
+  display: "flex",
+  justifyContent: "space-between",
+}));
+
+export default function Header() {
+  let navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            tourmonkey
-          </Typography>
-          <Search>
+      <AppBar
+        position="static"
+        style={{ backgroundColor: "#F7F7F7", color: "#000" }}
+      >
+        <StylesToolbar>
+          <img
+            onClick={() => navigate("/events/booking")}
+            src="/logo.png"
+            alt="name"
+            style={{ width: "150px", height: "50px", cursor: "pointer" }}
+            // sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+          />
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Search Item…"
               inputProps={{ "aria-label": "search" }}
             />
-          </Search>
-        </Toolbar>
+          </Search> */}
+        </StylesToolbar>
       </AppBar>
     </Box>
   );
